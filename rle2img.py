@@ -85,14 +85,12 @@ class RLE(Configuration):
 
     def next_sequence(self):
         specifications_regex = \
-            '(\$)|(!)|(\d*b)|(\d*o)' # regex matches $, !, #b, #o
+            '(\d*\$)|(!)|(\d*b)|(\d*o)' # regex matches $, !, #b, #o
 
         match = re.search(specifications_regex, self.specifications)
         specification = match.group()
         self.specifications = self.specifications[len(specification):]
-        if specification == '$':
-            return ('$', 0)
-        elif specification == '!':
+        if specification == '!':
             self.specifications = '!'
             return ('!', 0)
         else:
